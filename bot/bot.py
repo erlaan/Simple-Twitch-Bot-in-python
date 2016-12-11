@@ -8,9 +8,10 @@ command1 = "Empty"
 
 # Some basic variables used to configure the bot
 server = "irc.twitch.tv" # Server
-password = "oauth:" # You get your OAuth key here http://twitchapps.com/tmi/
-channel = "#channel" # Channel
-botnick = "Nick" # Your bots nick
+password = "oauth:".encode() # You get your OAuth key here http://twitchapps.com/tmi/
+channel = "#channel".encode() # Channel
+botnick = "Nick".encode() # Your bots nick
+port = 6667
 
 def ping(): # This is our first function! It will respond to server Pings.
   ircsock.send("PONG :pingis\n")
@@ -54,10 +55,10 @@ def rip():
  ircsock.send("PRIVMSG " + channel + " :Rest in PEACE! \n")
 
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ircsock.connect((server, 6667)) # Here we connect to the server using the port 6667
-ircsock.send("PASS "+ password +"\n")
-ircsock.send("USER "+ botnick +" "+ botnick +" "+ botnick +" :All hail Sandia!\n") # user authentication
-ircsock.send("NICK "+ botnick +"\n") # here we actually assign the nick to the bot
+ircsock.connect((server, port)) # Here we connect to the server using the port 6667
+ircsock.send("PASS ".encode() + password +"\n".encode())
+ircsock.send("USER ".encode() + botnick +" ".encode()+ botnick +" ".encode()+ botnick +" :All hail Sandia!\n".encode()) # user authentication
+ircsock.send("NICK ".encode()+ botnick +"\n".encode()) # here we actually assign the nick to the bot
 
 joinchan(channel) # Join the channel using the functions we previously defined
 
@@ -66,7 +67,7 @@ while 1: # Be careful with these! it might send you to an infinite loop
   ircmsg = ircmsg.strip('\n\r') # removing any unnecessary linebreaks.
   print(ircmsg) # Here we print what's coming from the server
 
-  if ircmsg.find(":Hello "+ botnick) != -1: # If we can find "Hello Mybot" it will call the function hello()
+  if ircmsg.find(":Hello "+ botnick != -1: # If we can find "Hello Mybot" it will call the function hello()
     hello()
 
   if ircmsg.find(":hello ") != -1 :
