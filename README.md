@@ -1,4 +1,4 @@
-# git2web
+# Simple Twitch Bot In python
 
 ## About:
 
