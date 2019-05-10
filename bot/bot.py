@@ -17,19 +17,19 @@ def ping(): # This is our first function! It will respond to server Pings.
   ircsock.send("PONG :pingis\n")
 
 def sendmsg(chan , msg): # This is the send message function, it simply sends messages to the channel.
-  ircsock.send("PRIVMSG "+ chan +" :"+ msg +"\n")
+  ircsock.send("PRIVMSG ".encode()+ chan +" :".encode()+ msg +"\n".encode())
 
 def joinchan(chan): # This function is used to join channels.
-  ircsock.send("JOIN "+ chan +"\n")
+  ircsock.send("JOIN ".encode()+ chan +"\n".encode())
 
 def hello(): # This function responds to a user that inputs "Hello Mybot"
-  ircsock.send("PRIVMSG "+ channel +" :Hello!\n")
+  ircsock.send("PRIVMSG ".encode()+ channel +" :Hello!\n".encode())
 
 def tyst(): # This function responds to a user that he gona be quiet!
-  ircsock.send("PRIVMSG "+ channel +" :TYST!\n")
+  ircsock.send("PRIVMSG ".encode()+ channel +" :TYST!\n".encode())
 
 def hailsandia(): # ALL HAIL SANDIA!
-  ircsock.send("PRIVMSG "+ channel  + " : ALL HAIL SAND1A! \n")
+  ircsock.send("PRIVMSG ".encode()+ channel  + " : ALL HAIL SAND1A! \n".encode())
 
 
 def cadd(cabb):
@@ -64,31 +64,31 @@ joinchan(channel) # Join the channel using the functions we previously defined
 
 while 1: # Be careful with these! it might send you to an infinite loop
   ircmsg = ircsock.recv(2048) # receive data from the server
-  ircmsg = ircmsg.strip('\n\r') # removing any unnecessary linebreaks.
+  ircmsg = ircmsg.strip('\n\r'.encode()) # removing any unnecessary linebreaks.
   print(ircmsg) # Here we print what's coming from the server
 
-  if ircmsg.find(":Hello "+ botnick != -1: # If we can find "Hello Mybot" it will call the function hello()
+  if ircmsg.find(":Hello ".encode()+ botnick) != -1: # If we can find "Hello Mybot" it will call the function hello()
     hello()
 
-  if ircmsg.find(":hello ") != -1 :
+  if ircmsg.find(":hello ".encode()) != -1 :
     hello()
 
-  if ircmsg.find(":*!")
+  #if ircmsg.find(":*!") :
 
-  if ircmsg.find("PING :") != -1: # if the server pings us then we've got to respond!
+  if ircmsg.find("PING :".encode()) != -1: # if the server pings us then we've got to respond!
     ping()
 
 
-  if ircmsg.find(":!sandia") != -1:
+  if ircmsg.find(":!sandia".encode()) != -1:
     hailsandia()
 
-  if ircmsg.find(":!command") != -1:
+  if ircmsg.find(":!command".encode()) != -1:
     commands()
-  if ircmsg.find(":!cadd") != -1:
-    cadd(ircmsg.split(":!cadd")[1])
+  if ircmsg.find(":!cadd".encode()) != -1:
+    cadd(ircmsg.split(":!cadd".encode())[1])
 
-  elif ircmsg.find(":!cdel") != -1:
+  elif ircmsg.find(":!cdel".encode()) != -1:
     cdel()
 
-  if ircmsg.find("QUIT") != -1:
+  if ircmsg.find("QUIT".encode()) != -1:
     rip()
