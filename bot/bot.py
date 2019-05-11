@@ -7,8 +7,8 @@ command = "I have no custom commands just now!"
 command1 = "Empty"
 
 # Some basic variables used to configure the bot
-server = "irc.twitch.tv" # Server
-password = "oauth:".encode() # You get your OAuth key here http://twitchapps.com/tmi/
+server = "irc.chat.twitch.tv" # Server
+password = "oauth:".encode() # You get your OAuth key here https://twitchapps.com/tmi/
 channel = "#channel".encode() # Channel
 botnick = "Nick".encode() # Your bots nick
 port = 6667
