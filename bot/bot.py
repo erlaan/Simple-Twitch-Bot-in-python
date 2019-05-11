@@ -35,15 +35,15 @@ def hailsandia(): # ALL HAIL SANDIA!
 def cadd(cabb):
  global command
  global command1
- if command1 == "Empty" :
+ if command1 == "Empty".encode() :
   command1 = cabb
  else :
-  command1 = command1 + " , "  + cabb
+  command1 = command1 + " , ".encode()  + cabb
 
  command = command1
  #return command
 def commands():
- ircsock.send("PRIVMSG " + channel + " :" + command + "\n")
+ ircsock.send("PRIVMSG ".encode() + channel + " :" + command + "\n")
 
 def ldel():
  global command
@@ -52,7 +52,7 @@ def ldel():
  command1 = "Empty"
 
 def rip():
- ircsock.send("PRIVMSG " + channel + " :Rest in PEACE! \n")
+ ircsock.send("PRIVMSG ".encode() + channel + " :Rest in PEACE! \n".encode())
 
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ircsock.connect((server, port)) # Here we connect to the server using the port 6667
