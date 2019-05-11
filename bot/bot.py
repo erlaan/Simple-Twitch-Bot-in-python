@@ -14,7 +14,7 @@ botnick = "Nick".encode() # Your bots nick
 port = 6667
 
 def ping(): # This is our first function! It will respond to server Pings.
-  ircsock.send("PONG :pingis\n")
+  ircsock.send("PONG :pingis\n".encode())
 
 def sendmsg(chan , msg): # This is the send message function, it simply sends messages to the channel.
   ircsock.send("PRIVMSG ".encode()+ chan +" :".encode()+ msg +"\n".encode())
@@ -30,26 +30,6 @@ def tyst(): # This function responds to a user that he gona be quiet!
 
 def hailsandia(): # ALL HAIL SANDIA!
   ircsock.send("PRIVMSG ".encode()+ channel  + " : ALL HAIL SAND1A! \n".encode())
-
-
-def cadd(cabb):
- global command
- global command1
- if command1 == "Empty".encode() :
-  command1 = cabb
- else :
-  command1 = command1 + " , ".encode()  + cabb
-
- command = command1
- #return command
-def commands():
- ircsock.send("PRIVMSG ".encode() + channel + " :" + command + "\n")
-
-def ldel():
- global command
- global command1
- command = "I have no custom commands just now!"
- command1 = "Empty"
 
 def rip():
  ircsock.send("PRIVMSG ".encode() + channel + " :Rest in PEACE! \n".encode())
