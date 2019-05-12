@@ -2,10 +2,6 @@
 # Import libraries.
 import socket
 
-#Some varibles!
-command = "I have no custom commands just now!"
-command1 = "Empty"
-
 # Some basic variables used to configure the bot
 server = "irc.chat.twitch.tv" # Server
 password = "oauth:".encode() # You get your OAuth key here https://twitchapps.com/tmi/
@@ -28,12 +24,9 @@ def hello(): # This function responds to a user that inputs "Hello Mybot"
 def help(): # This will respond what commands that exist for the bot!
     ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!".encode())
 
-def rip():
- ircsock.send("PRIVMSG ".encode() + channel + " :Rest in PEACE! \n".encode())
-
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ircsock.connect((server, port)) # Here we connect to the server using the port 6667
-ircsock.send("PASS ".encode() + password +"\n".encode())
+ircsock.send("PASS ".encode() + password +"\n".encode()) # This send the password to the irc server
 ircsock.send("USER ".encode() + botnick +" ".encode()+ botnick +" ".encode()+ botnick +" :All hail Sandia!\n".encode()) # user authentication
 ircsock.send("NICK ".encode()+ botnick +"\n".encode()) # here we actually assign the nick to the bot
 
@@ -50,8 +43,5 @@ while 1: # Be careful with these! it might send you to an infinite loop
   if ircmsg.find("PING :".encode()) != -1: # if the server pings us then we've got to respond!
     ping()
 
-  if ircmsg.find(":!help".encode()) != -1:
+  if ircmsg.find(":!help".encode()) != -1: # this looks for someone that want to know what commands exist
     help()
-
-  if ircmsg.find("QUIT".encode()) != -1:
-    rip()
