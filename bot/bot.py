@@ -26,8 +26,7 @@ def hello(): # This function responds to a user that inputs "Hello Mybot"
   ircsock.send("PRIVMSG ".encode()+ channel +" :Hello!\n".encode())
 
 def help(): # This will respond what commands that exist for the bot!
-    ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!")
-
+    ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!".encode())
 
 def rip():
  ircsock.send("PRIVMSG ".encode() + channel + " :Rest in PEACE! \n".encode())
