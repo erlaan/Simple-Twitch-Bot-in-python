@@ -25,11 +25,9 @@ def joinchan(chan): # This function is used to join channels.
 def hello(): # This function responds to a user that inputs "Hello Mybot"
   ircsock.send("PRIVMSG ".encode()+ channel +" :Hello!\n".encode())
 
-def tyst(): # This function responds to a user that he gona be quiet!
-  ircsock.send("PRIVMSG ".encode()+ channel +" :TYST!\n".encode())
+def help(): # This will respond what commands that exist for the bot!
+    ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!")
 
-def hailsandia(): # ALL HAIL SANDIA!
-  ircsock.send("PRIVMSG ".encode()+ channel  + " : ALL HAIL SAND1A! \n".encode())
 
 def rip():
  ircsock.send("PRIVMSG ".encode() + channel + " :Rest in PEACE! \n".encode())
@@ -50,25 +48,11 @@ while 1: # Be careful with these! it might send you to an infinite loop
   if ircmsg.find(":Hello ".encode()+ botnick) != -1: # If we can find "Hello Mybot" it will call the function hello()
     hello()
 
-  if ircmsg.find(":hello ".encode()) != -1 :
-    hello()
-
-  #if ircmsg.find(":*!") :
-
   if ircmsg.find("PING :".encode()) != -1: # if the server pings us then we've got to respond!
     ping()
 
-
-  if ircmsg.find(":!sandia".encode()) != -1:
-    hailsandia()
-
-  if ircmsg.find(":!command".encode()) != -1:
-    commands()
-  if ircmsg.find(":!cadd".encode()) != -1:
-    cadd(ircmsg.split(":!cadd".encode())[1])
-
-  elif ircmsg.find(":!cdel".encode()) != -1:
-    cdel()
+  if ircmsg.find(":!help".encode()) != -1:
+    help()
 
   if ircmsg.find("QUIT".encode()) != -1:
     rip()
