@@ -26,14 +26,14 @@ def help(): # This will respond what commands that exist for the bot!
     ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!".encode())
 
 def roll(msg):
-  rand = random.randint(1,100)
-  randtostring = str(rand)
+  rand = random.randint(1,100) #Here do we get a random int between 1 and 100
+  randtostring = str(rand) #Here we convert the int to string
   name = username(msg)
   ircsock.send("PRIVMSG ".encode()+ channel + " :".encode() +name.encode() + " ".encode() + randtostring.encode() + "\n".encode())
 def username(msg):
-    msg = msg.split('!', 1)
-    msg = msg[0].split(':', 1)
-    return(msg[1])
+    msg = msg.split('!', 1) # first we remove everything after !
+    msg = msg[0].split(':', 1) #Then we remove everything before :
+    return(msg[1]) #And then we return the username to the caller
 
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ircsock.connect((server, port)) # Here we connect to the server using the port 6667
