@@ -2,12 +2,22 @@
 # Import libraries.
 import socket, random
 
-# Some basic variables used to configure the bot
+#--------------config variables section Start ---------------------------------------------#
 server = "irc.chat.twitch.tv" # Server
 password = "oauth:".encode() # You get your OAuth key here https://twitchapps.com/tmi/
 channel = "#channel".encode() # Channel
 botnick = "Nick".encode() # Your bots nick
 port = 6667
+#--------------Config variables section END ---------------------------------------------#
+
+#--------------variables section Start ---------------------------------------------#
+
+commands = " The commands I have right now is !roll this will draw a random nummber between 1 and 100 "
+
+
+#--------------variables section END ---------------------------------------------#
+
+#---------------Function section Start ---------------------------------------------#
 
 def ping(): # This is our first function! It will respond to server Pings.
   ircsock.send("PONG :pingis\n".encode())
@@ -23,17 +33,20 @@ def hello(msg): # This function responds to a user that inputs "Hello Mybot"
   ircsock.send("PRIVMSG ".encode()+ channel +" :Hello ".encode() + name.encode() + "\n".encode())
 
 def help(): # This will respond what commands that exist for the bot!
-    ircsock.send("PRIVMSG ".encode() + channel +" :I have no commands righ now!".encode())
+    ircsock.send("PRIVMSG ".encode() + channel +" :".encode()+ commands.encode() + "\n".encode())
 
 def roll(msg):
   rand = random.randint(1,100) #Here do we get a random int between 1 and 100
   randtostring = str(rand) #Here we convert the int to string
   name = username(msg)
   ircsock.send("PRIVMSG ".encode()+ channel + " :".encode() +name.encode() + " ".encode() + randtostring.encode() + "\n".encode())
+
 def username(msg):
     msg = msg.split('!', 1) # first we remove everything after !
     msg = msg[0].split(':', 1) #Then we remove everything before :
     return(msg[1]) #And then we return the username to the caller
+
+#---------------Function section END ---------------------------------------------#
 
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ircsock.connect((server, port)) # Here we connect to the server using the port 6667
